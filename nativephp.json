@@ -1,0 +1,74 @@
+{
+    "name": "smronju/nativephp-scanner",
+    "version": "1.0.0",
+    "description": "Implements NativePHP Mobile's Scanner::scan() on both platforms — a full-screen CameraX + ML Kit (bundled model, works without Google Play services) scanner on Android, AVFoundation on iOS — with single and continuous modes. nativephp/mobile core registers Scanner.Scan on neither platform.",
+    "namespace": "Scanner",
+    "keywords": ["nativephp", "mobile", "scanner", "barcode", "qr"],
+    "category": "device",
+    "license": "MIT",
+    "pricing": {
+        "type": "free"
+    },
+    "author": {
+        "name": "Mohammad Shoriful Islam Ronju",
+        "email": "smronju@gmail.com",
+        "url": "https://github.com/smronju"
+    },
+    "platforms": ["android", "ios"],
+    "bridge_functions": [
+        {
+            "name": "Scanner.Scan",
+            "android": "com.smronju.plugins.scanner.ScannerFunctions.Scan",
+            "ios": "ScannerFunctions.Scan",
+            "description": "Parameters {prompt, continuous, formats, id, event}. Returns at once and opens a full-screen camera scanner; asks for camera permission first when needed. Dispatches CodeScanned {data, format, id} for the first code (single mode, then closes) or for every code (continuous mode, same value ignored while it stays in view and for 1.5 s after). Closing without a code dispatches ScannerCancelled {cancelled, reason, id}; reason is cancelled, done (continuous, at least one code) or permission_denied."
+        }
+    ],
+    "android": {
+        "min_version": 26,
+        "permissions": [
+            "android.permission.CAMERA",
+            "android.permission.VIBRATE"
+        ],
+        "features": [
+            {
+                "name": "android.hardware.camera",
+                "required": false
+            }
+        ],
+        "repositories": [],
+        "dependencies": {
+            "implementation": [
+                "androidx.camera:camera-core:1.4.1",
+                "androidx.camera:camera-camera2:1.4.1",
+                "androidx.camera:camera-lifecycle:1.4.1",
+                "androidx.camera:camera-view:1.4.1",
+                "com.google.mlkit:barcode-scanning:17.3.0"
+            ]
+        },
+        "activities": [],
+        "services": [],
+        "receivers": [],
+        "providers": []
+    },
+    "ios": {
+        "min_version": "15.0",
+        "info_plist": {
+            "NSCameraUsageDescription": "Scans product barcodes and invoice QR codes."
+        },
+        "repositories": [],
+        "dependencies": {
+            "swift_packages": [],
+            "pods": []
+        }
+    },
+    "assets": {
+        "android": [],
+        "ios": []
+    },
+    "secrets": [],
+    "events": [
+        "Native\\Mobile\\Events\\Scanner\\CodeScanned",
+        "Native\\Mobile\\Events\\Scanner\\ScannerCancelled"
+    ],
+    "service_provider": "Smronju\\NativephpScanner\\ScannerServiceProvider"
+}

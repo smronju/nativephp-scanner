@@ -1,0 +1,44 @@
+{
+    "name": "smronju/nativephp-scanner",
+    "description": "Implements NativePHP Mobile's Scanner::scan() on both platforms — CameraX with the bundled ML Kit barcode model on Android (no Google Play services needed), AVFoundation on iOS. nativephp/mobile core ships the PHP side but registers the Scanner.Scan bridge function on neither platform.",
+    "version": "1.0.0",
+    "type": "nativephp-plugin",
+    "license": "MIT",
+    "keywords": ["nativephp", "mobile", "laravel", "scanner", "barcode", "qr", "ean", "android", "ios"],
+    "authors": [
+        {
+            "name": "Mohammad Shoriful Islam Ronju",
+            "email": "smronju@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "nativephp/mobile": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smronju\\NativephpScanner\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Smronju\\NativephpScanner\\ScannerServiceProvider"
+            ]
+        },
+        "nativephp": {
+            "manifest": "nativephp.json"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.0 || ^5.0"
+    },
+    "scripts": {
+        "test": "pest"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
